@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>OpenMRSClient</title>
+
+    <!-- WinJS references -->
+    <link href="WinJS/css/ui-light.css" rel="stylesheet" />
+    <script src="WinJS/js/base.js"></script>
+    <script src="WinJS/js/ui.js"></script>
+
+    <!-- OpenMRSClient references -->
+    <link href="/css/default.css" rel="stylesheet" />
+	<link href="/css/font-awesome.min.css" rel="stylesheet" />
+	<script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/default.js"></script>
+</head>
+<body class="win-type-body" id="mBody">
+	<div id="app">
+		<div class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
+            openedDisplayMode: 'overlay',
+            closedDisplayMode: 'inline'
+         }">
+			<!-- Pane area -->
+			<div id="menu">
+				<div class="header">
+					<button class="win-splitviewpanetoggle"
+							data-win-control="WinJS.UI.SplitViewPaneToggle"
+							data-win-options="{ splitView: select('.splitView') }"></button>
+					<div class="title">  Menu  </div>
+				</div>
+
+				<div class="nav-commands">
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Home', icon: 'home', oninvoked: mySplitView.homeClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Find Patients', icon: 'zoom', oninvoked: mySplitView.patientClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Capture Vitals', icon: 'edit', oninvoked: mySplitView.settingsClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Active Visits', icon: 'calendar', oninvoked: mySplitView.settingsClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Settings', icon: 'settings', oninvoked: mySplitView.settingsClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Logout', icon: 'back', oninvoked: mySplitView.logoutClicked}"></div>
+				</div>
+			</div>
+
+			<!-- Content area -->
+			<div class="contenttext">
+				<h1 class="win-h1">OpenMRS</h1>
+				<div class="mainContent" id="login">
+					<h4 class="win-h4">Server adress:</h4>
+					<input id="server" class="win-textarea" type="URL" value="http://demo.openmrs.org/openmrs" /><br />
+					<button id="checkUrlButton" onclick="checkUrlClickHandler" class="win-button"> Check Url </button>
+					<h4 class="win-h4">Username:</h4>
+					<input id="username" class="win-textarea" type="text" value="admin" />
+					<h4 class="win-h4">Password:</h4>
+					<input id="password" class="win-textarea" type="password" value="Admin123" /><br />
+					<button id="loginButton" onclick="loginClickHandler" class="win-button win-button-primary"> Login </button>
+				</div>
+				<div class="mainContent" id="homeContext">
+					<h1>Basic Functions</h1>
+				</div>
+				<div class="mainContent" id="findPatient">
+					<h1>Great literature of Ancient Athens</h1>
+					<div id="repeater" data-win-control="WinJS.UI.Repeater"
+							data-win-options="{ data: Patients.data }">
+						<section>
+							<h2 data-win-bind="textContent: bookTitle"></h2>
+							<p><i data-win-bind="textContent: author"></i></p>
+							<p data-win-bind="textContent: synopsis"></p>
+						</section>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div id="dialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+		title: 'Error:',
+		secondaryCommandText: 'Back'
+		 }">
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿body {
+}
+.content,
+#app {
+    height: 100%;
+}
+
+    #app .win-splitviewpanetoggle {
+        float: left;
+    }
+
+    /* SplitView pane content style*/
+    #app .header {
+        white-space: nowrap;
+    }
+
+    #app .title {
+        font-size: 25px;
+        left: 50px;
+        margin-top: 6px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    #app .nav-commands {
+        margin-top: 20px;
+    }
+
+.win-splitviewcommand-button {
+    background-color: transparent;
+}
+
+#app .win-splitview-pane-closed .win-splitviewcommand-label {
+    /*  Make sure pane content doesn't scroll if 
+    SplitViewCommand label receives focus while pane is closed.
+    */
+    visibility: hidden;
+}
+
+/*SplitView content style*/
+#app .win-splitview-content {
+    background-color: #ecf0f1;
+}
+
+#app .contenttext {
+    margin-left: 20px;
+    margin-top: 6px;
+}
+
+#app .mainContent {
+	margin-top: 20px;
+}
+
+#app .mainBoxMenu {
+	display: block;
+	position:  absolute;
+}
+
+#app .menuBox {
+	min-width: 100px;
+    width: 150px;
+	min-height: 150px;
+    height: 100px;
+	margin: 5px;
+	padding: 20px;
+	text-align: center;
+	vertical-align: central;
+	background-color: #3498db;
+	color: white;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#app .menuBox .fa {
+	font-size: 6em;
+	display: block;
+}

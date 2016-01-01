@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "OpenMRSClient", "OpenMRSClient\OpenMRSClient.jsproj", "{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|ARM.ActiveCfg = Debug|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|ARM.Build.0 = Debug|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|ARM.Deploy.0 = Debug|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x64.ActiveCfg = Debug|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x64.Build.0 = Debug|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x64.Deploy.0 = Debug|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x86.ActiveCfg = Debug|x86
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x86.Build.0 = Debug|x86
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Debug|x86.Deploy.0 = Debug|x86
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|ARM.ActiveCfg = Release|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|ARM.Build.0 = Release|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|ARM.Deploy.0 = Release|ARM
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x64.ActiveCfg = Release|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x64.Build.0 = Release|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x64.Deploy.0 = Release|x64
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x86.ActiveCfg = Release|x86
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x86.Build.0 = Release|x86
+		{DAD345C5-4CB6-442F-BE9E-99DB09E4ADBD}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
