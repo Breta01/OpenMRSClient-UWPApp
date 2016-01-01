@@ -41,6 +41,7 @@
 			    UIController('login');
 			    document.getElementById('loginButton').addEventListener('click', loginClickHandler, false);
 			    document.getElementById('checkUrlButton').addEventListener('click', checkUrlClickHandler, false);
+			    document.getElementById('searchButton').addEventListener('click', searchClickHandler, false);
 			});
 		}
 	};
@@ -162,48 +163,120 @@
 	    }
 	}
 
-    // Define a data set as an array of objects.
-	var patients = [
-        {
-            bookTitle: "PA",
-            author: "X",
-            synopsis: "10"
-        },
-        {
-            bookTitle: "History of the Peloponnesian War",
-            author: "Thucydides",
-            synopsis: "The mighty cities Sparta and Athens war for supremacy over the Hellenes."
-        },
-        {
-            bookTitle: "Antigone",
-            author: "Sophocles",
-            synopsis: "A young woman defies the king of the city by giving her father a proper burial."
-        }
-	];
-
 	function getPatientsList() {
-	    var getUrl = server + "/ws/rest/v1/patient?lastviewed=";
+	    var getUrl = server + "/ws/rest/v1/patient?lastviewed&v=default";
 	    $.ajax({
 	        beforeSend: function (xhr) {
 	            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
 	        },
 	        method: "GET",
-	        async: true,
 	        url: getUrl,
-	        cache: false,
 	        success: function (data) {
 	            console.log("PatienteData")
 	            console.log(data);
-	        }
+	            setPatients(data);
+            }
 	    });
 	}
 
-    // Convert the array into a List object.
-	var patientsList = new WinJS.Binding.List(patients);
+	function searchClickHandler() {
+	    var searchVal = document.getElementById('searchLable').value;
+	    if (isNotEmpty(searchVal)) {
+	        var getUrl = server + "/ws/rest/v1/patient?q=" + searchVal + "&v=default";
+	        $.ajax({
+	            beforeSend: function (xhr) {
+	                xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+	            },
+	            method: "GET",
+	            url: getUrl,
+	            success: function (data) {
+	                console.log("PatienteData")
+	                console.log(data);
+	                setPatients(data);
+	            }
+	        });
+	    }
+	    else {
+	        getPatientsList();
+	    }
+	}
 
-    // Expose the list globally in the 'Books' namespace.
+	function setPatients(data) {
+	    var newPatients = [];
+	    if (data.results.length == 0) {
+	        newPatients.push({
+	            name: 'No Patients Found',
+	            age: '',
+	            genre: '',
+	            birthdate: ''
+	        });
+	    }
+	    else {
+	        for (var i = 0; i < data.results.length; i++) {
+	            console.log(data.results[i]);
+	            var bdt = new Date(data.results[i].person.birthdate);
+	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
+	            var birthdate = bdt.getDay() + " " + month + " " + bdt.getFullYear();
+	            var gender = 'Male';
+	            if (data.results[i].person.gender === 'F')
+	                gender = 'Female'
+	            newPatients.push({
+	                name: data.results[i].display,
+	                age: data.results[i].person.age,
+	                genre: gender,
+	                birthdate: birthdate,
+	                uuid: data.results[i].uuid
+	            });
+	        }
+	    }
+	    console.log(newPatients)
+	    var patientsListNew = new WinJS.Binding.List(newPatients);
+	    var patRepeater = document.querySelector("#repeater");
+	    patRepeater.winControl.data = patientsListNew;
+	    WinJS.UI.Animation.slideUp(patRepeater);
+	}
+
+	function showPatientDetails(uuid) {
+	    var getUrl = server + '/ws/rest/v1/patient/' + uuid + '?v=full';
+	    $.ajax({
+	        beforeSend: function (xhr) {
+	            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+	        },
+	        method: "GET",
+	        url: getUrl,
+	        success: function (data) {
+	            console.log("PatienteData")
+	            console.log(data);
+	            console.log('showing details');
+	        }
+	    });
+	}
+    
+    // Define patients set as an array of objects for list.
+	var patients = [];
+    //Convert the array into a List object.
+	var patientsList = new WinJS.Binding.List(patients);
+    //Expose the list globally in the 'Patients' namespace.
 	WinJS.Namespace.define("Patients",
         { data: patientsList });
+
+	WinJS.Namespace.define("Navigation", {
+	    dataBinding: WinJS.Binding.as({
+	        navigations: new WinJS.Binding.List([]),
+	    }),
+
+	    NavigationItem: WinJS.Class.define(
+                function (element, options) {
+                    this.element = element;
+                    this.element.onclick = function (event) {
+                        var item = this.winControl.data;
+                        // Handle your onclick here
+                        console.log(item);
+                        showPatientDetails(item.uuid)
+                    };
+                }
+            ),
+	});
 
 	function isNotEmpty(str) {
 	    return !(!str || 0 === str.length);

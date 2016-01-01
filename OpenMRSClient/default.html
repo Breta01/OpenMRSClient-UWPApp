@@ -41,29 +41,33 @@
 			</div>
 
 			<!-- Content area -->
-			<div class="contenttext">
-				<h1 class="win-h1">OpenMRS</h1>
+			<div class="contenttext">				
 				<div class="mainContent" id="login">
+					<h1 class="win-h1">OpenMRS</h1>
 					<h4 class="win-h4">Server adress:</h4>
-					<input id="server" class="win-textarea" type="URL" value="http://demo.openmrs.org/openmrs" /><br />
+					<input id="server" class="win-textarea" type="URL" placeholder="Server Url" value="http://demo.openmrs.org/openmrs" /><br />
 					<button id="checkUrlButton" onclick="checkUrlClickHandler" class="win-button"> Check Url </button>
 					<h4 class="win-h4">Username:</h4>
-					<input id="username" class="win-textarea" type="text" value="admin" />
+					<input id="username" class="win-textarea" type="text" placeholder="Username" value="admin" />
 					<h4 class="win-h4">Password:</h4>
-					<input id="password" class="win-textarea" type="password" value="Admin123" /><br />
+					<input id="password" class="win-textarea" type="password" placeholder="Password" value="Admin123" /><br />
 					<button id="loginButton" onclick="loginClickHandler" class="win-button win-button-primary"> Login </button>
 				</div>
 				<div class="mainContent" id="homeContext">
-					<h1>Basic Functions</h1>
+					<h2 class="win-h2"> Home </h2>
 				</div>
 				<div class="mainContent" id="findPatient">
-					<h1>Great literature of Ancient Athens</h1>
-					<div id="repeater" data-win-control="WinJS.UI.Repeater"
+					<h2 class="win-h2"> Find Patients </h2><br />
+					<input id="searchLable" class="win-textarea" placeholder="Patient Name" type="text" value="" />
+					<button id="searchButton" onclick="searchClickHandler" class="win-button win-button-primary"> Search </button>
+					<div id="repeater" class="repeater" data-win-control="WinJS.UI.Repeater"
 							data-win-options="{ data: Patients.data }">
-						<section>
-							<h2 data-win-bind="textContent: bookTitle"></h2>
-							<p><i data-win-bind="textContent: author"></i></p>
-							<p data-win-bind="textContent: synopsis"></p>
+						<section data-win-control="Navigation.NavigationItem" data-win-bind="winControl.data: this">
+							<div><h2 id="name" data-win-bind="textContent: name"></h2></div>
+							<p data-win-bind="textContent: age"></p>
+							<p class="centralList"><i data-win-bind="textContent: genre"></i></p>
+							<p data-win-bind="textContent: birthdate"></p><br />
+							<p class="hiden" data-win-bind="textContent: uuid"></p>
 						</section>
 					</div>
 				</div>				
