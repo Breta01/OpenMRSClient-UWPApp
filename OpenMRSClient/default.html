@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>OpenMRSClient</title>
+    <title>OpenMRS Client</title>
 
     <!-- WinJS references -->
     <link href="WinJS/css/ui-light.css" rel="stylesheet" />
@@ -11,7 +11,6 @@
 
     <!-- OpenMRSClient references -->
     <link href="/css/default.css" rel="stylesheet" />
-	<link href="/css/font-awesome.min.css" rel="stylesheet" />
 	<script src="/js/jquery-2.1.4.min.js"></script>
     <script src="/js/default.js"></script>
 </head>
@@ -48,14 +47,15 @@
 					<input id="server" class="win-textarea" type="URL" placeholder="Server Url" value="http://devtest01.openmrs.org/openmrs" /><br />
 					<button id="checkUrlButton" onclick="checkUrlClickHandler" class="win-button"> Check Url </button>
 					<h4 class="win-h4">Username:</h4>
-					<input id="username" class="win-textarea" type="text" placeholder="Username" value="admin" />
+					<input id="username" class="win-textarea" type="text" placeholder="Username" value="" />
 					<h4 class="win-h4">Password:</h4>
-					<input id="password" class="win-textarea" type="password" placeholder="Password" value="Admin123" /><br />
+					<input id="password" class="win-textarea" type="password" placeholder="Password" value="" /><br />
 					<button id="loginButton" onclick="loginClickHandler" class="win-button win-button-primary"> Login </button>
 				</div>
 				<div class="mainContent" id="homeContext">
-					<h2 class="win-h2"> Home </h2>
-
+					<h1 class="win-h1"> Home </h1>
+					<h2 class="win-h2"> Welcome to OpenMRS. </h2>
+					<!-- Add some simple dashboard with actual status -->
 				</div>
 				<div class="mainContent" id="findPatient">
 					<h2 class="win-h2"> Find Patients </h2><br />

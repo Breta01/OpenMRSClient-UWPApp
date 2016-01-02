@@ -6253,7 +6253,7 @@ button.win-command:disabled:active .win-label {
   background-color: #f2f2f2;
 }
 button.win-splitviewpanetoggle {
-  color: #000000;
+  color: white;
   background-color: transparent;
 }
 button.win-splitviewpanetoggle:active,
@@ -6396,7 +6396,7 @@ html.win-hoverable .win-navbarcommand-splitbutton:hover.win-pressed {
   background-color: rgba(0, 0, 0, 0.28);
 }
 html.win-hoverable button.win-splitviewpanetoggle:hover {
-  color: #000000;
+  color: white;
   background-color: rgba(0, 0, 0, 0.1);
 }
 .win-ui-dark body {

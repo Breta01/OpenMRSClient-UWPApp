@@ -22,7 +22,6 @@
 	        UIController('login');
 	    }),
 	    patientClicked: WinJS.UI.eventHandler(function (ev) {
-	        console.log('patient');
 	        UIController('findPatient');
 	        getPatientsList();
 	    }),
@@ -60,7 +59,6 @@
 	    username = document.getElementById('username').value;
 	    password = document.getElementById('password').value;
 
-	    console.log(username + ":" + password);
 	    if (isNotEmpty(server) && isNotEmpty(username) && isNotEmpty(password)) {
 	        var getUrl = server + "/ws/rest/v1/session";
 	        $.ajax({
@@ -72,16 +70,11 @@
 	            url: getUrl,            
 	            cache: false,
 	            success: function (data) {
-	                console.log("success")
-	                console.log(data);
-
 	                var res = data.authenticated;
 	                if (res) {
-	                    console.log("Login!!!")
 	                    UIController('home');
 	                }
 	                else {
-	                    console.log("bad login")
 	                    document.getElementById('password').style.borderColor = '#c0392b';
 	                    document.getElementById('username').style.borderColor = '#c0392b';
 	                    var contentDialog = document.querySelector(".win-contentdialog").winControl;
@@ -117,7 +110,6 @@
 	        $.ajax({
 	            url: getUrl,
 	            success: function (data) {
-	                console.log();
 	                document.getElementById('server').style.borderColor = '#40d47e';
 	            },
 	            error: function () {
@@ -150,6 +142,8 @@
 	            $('#homeContext').hide();
 	            $("#patientDetails").hide();
 	            $('#findPatient').hide();
+	            document.getElementById('username').value = '';
+	            document.getElementById('password').value = '';
 	            $('#login').show();	            
 	            WinJS.UI.XYFocus.moveFocus("right");
 	            WinJS.UI.Animation.enterPage(document.getElementById('mBody'));
@@ -184,8 +178,6 @@
 	        method: "GET",
 	        url: getUrl,
 	        success: function (data) {
-	            console.log("PatienteData")
-	            console.log(data);
 	            setPatients(data);
             }
 	    });
@@ -202,8 +194,6 @@
 	            method: "GET",
 	            url: getUrl,
 	            success: function (data) {
-	                console.log("PatienteData")
-	                console.log(data);
 	                setPatients(data);
 	            }
 	        });
@@ -225,7 +215,6 @@
 	    }
 	    else {
 	        for (var i = 0; i < data.results.length; i++) {
-	            console.log(data.results[i]);
 	            var bdt = new Date(data.results[i].person.birthdate);
 	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
 	            var birthdate = bdt.getDay() + " " + month + " " + bdt.getFullYear();
@@ -241,7 +230,6 @@
 	            });
 	        }
 	    }
-	    console.log(newPatients)
 	    var patientsListNew = new WinJS.Binding.List(newPatients);
 	    var patRepeater = document.querySelector("#repeater");
 	    patRepeater.winControl.data = patientsListNew;
@@ -257,8 +245,6 @@
 	        method: "GET",
 	        url: getUrl,
 	        success: function (data) {
-	            console.log("PatienteData")
-	            console.log(data);
 	            var patientDetails = [];
 	            var bdt = new Date(data.person.birthdate);
 	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
@@ -307,8 +293,7 @@
                     this.element = element;
                     this.element.onclick = function (event) {
                         var item = this.winControl.data;
-                        // Handle your onclick here
-                        console.log(item);
+                        // Handle onclick here
                         showPatientDetails(item.uuid)
                     };
                 }

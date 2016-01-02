@@ -1,7 +1,4 @@
-﻿html, body {
-	
-}
-html, body {    
+﻿html, body {    
     height:100%;
     margin: 0;
 }
@@ -35,8 +32,12 @@ html, body {
 
 .win-splitviewcommand-button {
     background-color: transparent;
+	color: white !important;
 }
-
+#menu {
+	background-color: #2c3e50;
+	color: white !important;
+}
 #app .win-splitview-pane-closed .win-splitviewcommand-label {
     /*  Make sure pane content doesn't scroll if 
     SplitViewCommand label receives focus while pane is closed.
@@ -122,7 +123,7 @@ html, body {
 #patientListRepeater {
 	text-align: center;
 	vertical-align: central;
-	border: 2px #3498db solid;
+	border: 2px #2c3e50 solid;
 	background-color: white;
 	width: auto;
 	display: inline-block;
@@ -130,7 +131,7 @@ html, body {
 	margin: 4px; 
 }
 #patientListRepeater:hover {
-	background: #3498db;
+	background: #2c3e50;
 	color: white;
 }
 #patientListRepeater:active {
@@ -161,6 +162,9 @@ html, body {
 		display: block;
 	}
 
+#searchLable {
+	width: auto;
+}
 #patientDetailsRepeater h3 {
 	padding: 0;
 	margin: 0;
