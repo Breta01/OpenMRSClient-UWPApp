@@ -153,6 +153,7 @@
 	            $('#login').hide();
 	            $("#homeContext").hide();
 	            $("#patientDetails").hide();
+	            document.getElementById('searchLable').value = '';
 	            $('.win-splitview-panewrapper').show();
 	            $("#findPatient").show();
 	            WinJS.UI.Animation.slideLeftIn(document.getElementById('findPatient'));
