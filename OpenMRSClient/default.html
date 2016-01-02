@@ -45,7 +45,7 @@
 				<div class="mainContent" id="login">
 					<h1 class="win-h1">OpenMRS</h1>
 					<h4 class="win-h4">Server adress:</h4>
-					<input id="server" class="win-textarea" type="URL" placeholder="Server Url" value="http://demo.openmrs.org/openmrs" /><br />
+					<input id="server" class="win-textarea" type="URL" placeholder="Server Url" value="http://devtest01.openmrs.org/openmrs" /><br />
 					<button id="checkUrlButton" onclick="checkUrlClickHandler" class="win-button"> Check Url </button>
 					<h4 class="win-h4">Username:</h4>
 					<input id="username" class="win-textarea" type="text" placeholder="Username" value="admin" />
@@ -55,6 +55,7 @@
 				</div>
 				<div class="mainContent" id="homeContext">
 					<h2 class="win-h2"> Home </h2>
+
 				</div>
 				<div class="mainContent" id="findPatient">
 					<h2 class="win-h2"> Find Patients </h2><br />
@@ -62,12 +63,40 @@
 					<button id="searchButton" onclick="searchClickHandler" class="win-button win-button-primary"> Search </button>
 					<div id="repeater" class="repeater" data-win-control="WinJS.UI.Repeater"
 							data-win-options="{ data: Patients.data }">
-						<section data-win-control="Navigation.NavigationItem" data-win-bind="winControl.data: this">
+						<section id="patientListRepeater" data-win-control="Navigation.NavigationItem" data-win-bind="winControl.data: this">
 							<div><h2 id="name" data-win-bind="textContent: name"></h2></div>
 							<p data-win-bind="textContent: age"></p>
-							<p class="centralList"><i data-win-bind="textContent: genre"></i></p>
+							<p class="centralList"><i data-win-bind="textContent: gender"></i></p>
 							<p data-win-bind="textContent: birthdate"></p><br />
 							<p class="hiden" data-win-bind="textContent: uuid"></p>
+						</section>
+					</div>
+				</div>
+				<div class="mainContent" id="patientDetails">
+					<h2 class="win-h2"> Patient Details </h2><br />
+					<div id="patientDetailsRepeater" class="patientDetails" data-win-control="WinJS.UI.Repeater"
+						 data-win-options="{ data: Patients.data }">
+						<section>
+							<h4 class="win-h3"> Name </h4>
+							<h3 data-win-bind="textContent: name"></h3>
+							<h4 class="win-h3"> ID </h4>
+							<h3 data-win-bind="textContent: id"></h3>
+							<h4 class="win-h4"> Gender </h4>
+							<p data-win-bind="textContent: gender"></p>
+							<h4 class="win-h4"> Age </h4>
+							<p data-win-bind="textContent: age"></p>
+							<h4 class="win-h4"> Birthdate </h4>
+							<p data-win-bind="textContent: birthdate"></p><br />
+							<h4 class="win-h3"> Address </h4>
+							<p data-win-bind="textContent: address"></p>
+							<h4 class="win-h4"> City </h4>
+							<p data-win-bind="textContent: city"></p>
+							<h4 class="win-h4"> Postal Code </h4>
+							<p data-win-bind="textContent: postalCode"></p>
+							<h4 class="win-h4"> State </h4>
+							<p data-win-bind="textContent: state"></p>
+							<h4 class="win-h4"> Country </h4>
+							<p data-win-bind="textContent: country"></p>
 						</section>
 					</div>
 				</div>				

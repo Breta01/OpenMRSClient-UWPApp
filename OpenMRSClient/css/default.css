@@ -1,8 +1,15 @@
-﻿body {
+﻿html, body {
+	
+}
+html, body {    
+    height:100%;
+    margin: 0;
 }
 .content,
 #app {
     height: 100%;
+	padding:0;
+    margin:0;
 }
 
     #app .win-splitviewpanetoggle {
@@ -70,13 +77,32 @@
 	display: inline-block;
 	cursor: pointer;
 }
-
 #app .menuBox .fa {
 	font-size: 6em;
 	display: block;
 }
 
-.win-disposable h2 {
+.mainContent {
+	display:block;
+}
+#findPatient {
+	position: absolute;
+    height: 100%;
+    overflow: scroll;
+}
+#repeater {
+	width: 100%;
+	position: relative;
+    z-index: 1;
+	padding-bottom: 50px;
+	padding-right: 20px;
+}
+	#repeater:after {
+	    content: '';
+        clear: both;
+        display: block;
+	}
+#patientListRepeater h2 {
 	display: inline-block;
 	padding: 0 10px;
 	padding-bottom: 0;
@@ -84,16 +110,16 @@
 	padding-top: 0;
 	margin-top: 0;
 }
-.win-disposable p {
+#patientListRepeater p {
 	display: inline-block;
 	padding: 0 10px;
 	margin: 0;
 }
-.win-disposable .centralList {
+#patientListRepeater .centralList {
 	border-left: 1px #3498db solid;
 	border-right: 1px #3498db solid;
 }
-.win-disposable section {
+#patientListRepeater {
 	text-align: center;
 	vertical-align: central;
 	border: 2px #3498db solid;
@@ -103,15 +129,52 @@
 	padding: 12px 8px;
 	margin: 4px; 
 }
-
-.win-disposable section:hover {
+#patientListRepeater:hover {
 	background: #3498db;
 	color: white;
 }
-
-.win-disposable section:active {
+#patientListRepeater:active {
 	background: #2980b9;
 }
-.win-disposable .hiden {
+#patientListRepeater .hiden {
 	display: none;
 }
+
+#patientDetails {
+	position: absolute;
+    height: 100%;
+	width: calc(100% - 20px);
+    overflow: scroll;
+}
+#patientDetailsRepeater {
+	/*overflow-y: scroll;
+	height: 80%;*/
+	width: 100%;
+	position: relative;
+    z-index: 1;
+	padding-bottom: 50px;
+	padding-right: 20px;
+}
+	#patientDetailsRepeater:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+
+#patientDetailsRepeater h3 {
+	padding: 0;
+	margin: 0;
+}
+#patientDetailsRepeater h4 {
+	padding: 8px 0 4px 0;
+	margin: 0;
+	display: inline-block;
+	width: auto;
+	border-bottom: 1px #3498db solid;
+}
+#patientDetailsRepeater p {
+	padding: 0;
+	margin: 0;
+}
+
+

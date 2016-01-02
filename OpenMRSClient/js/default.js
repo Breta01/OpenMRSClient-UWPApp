@@ -135,6 +135,7 @@
 
 	        case 'home':
 	            $("#findPatient").hide();
+	            $("#patientDetails").hide();
 	            $('.win-splitview-panewrapper').show();
 	            $('#login').hide();
 	            $("#homeContext").show();
@@ -147,6 +148,7 @@
 	            $('.win-splitview-panewrapper').hide();
 	            $('.win-splitview-paneplaceholder').hide();
 	            $('#homeContext').hide();
+	            $("#patientDetails").hide();
 	            $('#findPatient').hide();
 	            $('#login').show();	            
 	            WinJS.UI.XYFocus.moveFocus("right");
@@ -156,9 +158,19 @@
 	        case 'findPatient':
 	            $('#login').hide();
 	            $("#homeContext").hide();
+	            $("#patientDetails").hide();
 	            $('.win-splitview-panewrapper').show();
 	            $("#findPatient").show();
 	            WinJS.UI.Animation.slideLeftIn(document.getElementById('findPatient'));
+	            break;
+
+	        case 'patientDetails':
+	            $('#login').hide();
+	            $("#homeContext").hide();
+	            $("#findPatient").hide();
+	            $('.win-splitview-panewrapper').show();
+	            $("#patientDetails").show();
+	            WinJS.UI.Animation.slideLeftIn(document.getElementById('patientDetails'));
 	            break;
 	    }
 	}
@@ -223,7 +235,7 @@
 	            newPatients.push({
 	                name: data.results[i].display,
 	                age: data.results[i].person.age,
-	                genre: gender,
+	                gender: gender,
 	                birthdate: birthdate,
 	                uuid: data.results[i].uuid
 	            });
@@ -247,7 +259,32 @@
 	        success: function (data) {
 	            console.log("PatienteData")
 	            console.log(data);
-	            console.log('showing details');
+	            var patientDetails = [];
+	            var bdt = new Date(data.person.birthdate);
+	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
+	            var birthdate = bdt.getDay() + " " + month + " " + bdt.getFullYear();
+	            var gender = 'Male';
+	            if (data.person.gender === 'F')
+	                gender = 'Female'
+
+	            patientDetails.push({
+	                name: data.person.display,
+	                id: data.identifiers[0].identifier,
+	                age: data.person.age,
+	                gender: gender,
+	                birthdate: birthdate,
+	                address: data.person.preferredAddress.address1,
+	                city: data.person.preferredAddress.cityVillage,
+	                postalCode: data.person.preferredAddress.postalCode,
+	                state: data.person.preferredAddress.stateProvince,
+	                country: data.person.preferredAddress.country
+	            });
+
+	            var patientsListNew = new WinJS.Binding.List(patientDetails);
+	            var patRepeater = document.querySelector("#patientDetailsRepeater");
+	            patRepeater.winControl.data = patientsListNew;
+	            UIController('patientDetails');
+	            WinJS.UI.Animation.slideUp(patRepeater);
 	        }
 	    });
 	}
