@@ -41,6 +41,7 @@
 			    document.getElementById('loginButton').addEventListener('click', loginClickHandler, false);
 			    document.getElementById('checkUrlButton').addEventListener('click', checkUrlClickHandler, false);
 			    document.getElementById('searchButton').addEventListener('click', searchClickHandler, false);
+			    startTime();
 			});
 		}
 	};
@@ -126,6 +127,7 @@
 	    switch (state) {
 
 	        case 'home':
+	            $("#settings").hide();
 	            $("#findPatient").hide();
 	            $("#patientDetails").hide();
 	            $('.win-splitview-panewrapper').show();
@@ -137,6 +139,7 @@
 	            break;
 
 	        case 'login':
+	            $("#settings").hide();
 	            $('.win-splitview-panewrapper').hide();
 	            $('.win-splitview-paneplaceholder').hide();
 	            $('#homeContext').hide();
@@ -150,6 +153,7 @@
 	            break;
 
 	        case 'findPatient':
+	            $("#settings").hide();
 	            $('#login').hide();
 	            $("#homeContext").hide();
 	            $("#patientDetails").hide();
@@ -160,12 +164,24 @@
 	            break;
 
 	        case 'patientDetails':
+	            $("#settings").hide();
 	            $('#login').hide();
 	            $("#homeContext").hide();
 	            $("#findPatient").hide();
 	            $('.win-splitview-panewrapper').show();
 	            $("#patientDetails").show();
 	            WinJS.UI.Animation.slideLeftIn(document.getElementById('patientDetails'));
+	            break;
+
+	        case 'settings':
+	            $('#login').hide();
+	            $("#homeContext").hide();
+	            $("#findPatient").hide();	            
+	            $("#patientDetails").hide();
+	            $('.win-splitview-panewrapper').show();
+	            $("#settings").show();
+	            WinJS.UI.Animation.slideLeftIn(document.getElementById('settings'));
+	            WinJS.UI.Animation.slideUp(document.getElementById('settingsContent'));
 	            break;
 	    }
 	}
@@ -300,6 +316,30 @@
                 }
             ),
 	});
+
+	function startTime() {
+	    var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	    var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	    var today = new Date();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    var d = today.getDay();
+	    var pm = 'AM';
+	    if (h >= 12) {
+	        pm = 'PM';
+	        h -= 12;
+	    }
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('time').innerHTML = h + ":" + m + ":" + s + ' ' + pm + ' '; 
+	    document.getElementById('date').innerHTML = weekday[today.getDay()] + ', ' + month[today.getMonth()] + ' ' + today.getUTCDate() + ', ' + today.getFullYear();
+	    var t = setTimeout(startTime, 500);
+	}
+	function checkTime(i) {
+	    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+	    return i;
+	}
 
 	function isNotEmpty(str) {
 	    return !(!str || 0 === str.length);

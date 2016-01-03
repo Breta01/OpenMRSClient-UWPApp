@@ -32,8 +32,8 @@
 				<div class="nav-commands">
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Home', icon: 'home', oninvoked: mySplitView.homeClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Find Patients', icon: 'zoom', oninvoked: mySplitView.patientClicked}"></div>
-					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Capture Vitals', icon: 'edit', oninvoked: mySplitView.settingsClicked}"></div>
-					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Active Visits', icon: 'calendar', oninvoked: mySplitView.settingsClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Capture Vitals', icon: 'edit', oninvoked: mySplitView.xxxClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Active Visits', icon: 'calendar', oninvoked: mySplitView.xxxClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Settings', icon: 'settings', oninvoked: mySplitView.settingsClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Logout', icon: 'back', oninvoked: mySplitView.logoutClicked}"></div>
 				</div>
@@ -47,15 +47,28 @@
 					<input id="server" class="win-textarea" type="URL" placeholder="Server Url" value="http://devtest01.openmrs.org/openmrs" /><br />
 					<button id="checkUrlButton" onclick="checkUrlClickHandler" class="win-button"> Check Url </button>
 					<h4 class="win-h4">Username:</h4>
-					<input id="username" class="win-textarea" type="text" placeholder="Username" value="" />
+					<input id="username" class="win-textarea" type="text" placeholder="Username" value="admin" />
 					<h4 class="win-h4">Password:</h4>
-					<input id="password" class="win-textarea" type="password" placeholder="Password" value="" /><br />
+					<input id="password" class="win-textarea" type="password" placeholder="Password" value="Admin123" /><br />
 					<button id="loginButton" onclick="loginClickHandler" class="win-button win-button-primary"> Login </button>
 				</div>
 				<div class="mainContent" id="homeContext">
 					<h1 class="win-h1"> Home </h1>
 					<h2 class="win-h2"> Welcome to OpenMRS. </h2>
+					<div class="dateBox">
+						<div id="time" class="win-h2"></div>
+						<div id="date" class="win-h4"></div>
+					</div>
 					<!-- Add some simple dashboard with actual status -->
+				</div>
+				<div class="mainContent" id="settings">
+					<h1 class="win-h1"> Settings </h1>
+					<div id="settingsContent">
+						<h3 class="win-h3"> About </h3>
+						<p>OpenMRS Client</p>
+						<p>Beta 0.1</p>
+					</div>
+					<!-- Add some simple settings -->
 				</div>
 				<div class="mainContent" id="findPatient">
 					<h2 class="win-h2"> Find Patients </h2><br />
