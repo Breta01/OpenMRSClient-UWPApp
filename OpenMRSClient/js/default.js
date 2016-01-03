@@ -30,8 +30,9 @@
 	    }),
 	    visitsClicked: WinJS.UI.eventHandler(function (ev) {
 	        UIController('actVisits');
-	        getVisitsList(0)
-	    }),	    
+	        getVisitsLength();
+	        getVisitsList(0);
+	    })	    
 	};
 
 	app.onactivated = function (args) {
@@ -61,11 +62,25 @@
 		// If you need to complete an asynchronous operation before your application is suspended, call args.setPromise().
 	};
 
+	function setVisitListButtons() {
+	    if (visitsListIndex === 0){
+	        document.getElementById('prevButton').style.backgroundColor = '#7f8c8d';
+	    }
+	    else {
+	        document.getElementById('prevButton').style.backgroundColor = 'rgba(0, 153, 188, 1)';
+	    }
+	    console.log(visitsListIndex + ':' + visitsListLength);
+	    if (visitsListLength == null || visitsListIndex < (visitsListLength - 10)) {
+	        document.getElementById('nextButton').style.backgroundColor = 'rgba(0, 153, 188, 1)';
+	    }
+	    else {
+	        document.getElementById('nextButton').style.backgroundColor = '#7f8c8d';
+	    }
+	}
 	function nextClickHandler() {
 	    if (visitsListIndex < (visitsListLength - 10))
 	        getVisitsList((visitsListIndex + 10));
 	}
-
 	function prevClickHandler() {
 	    if (visitsListIndex > 0)
 	        getVisitsList((visitsListIndex - 10));
@@ -166,8 +181,8 @@
 	            $('#homeContext').hide();
 	            $("#patientDetails").hide();
 	            $('#findPatient').hide();
-	            //document.getElementById('username').value = '';
-	            //document.getElementById('password').value = '';
+	            document.getElementById('username').value = '';
+	            document.getElementById('password').value = '';
 	            $('#login').show();	            
 	            WinJS.UI.XYFocus.moveFocus("right");
 	            WinJS.UI.Animation.enterPage(document.getElementById('mBody'));
@@ -327,7 +342,7 @@
 	    });
 	}
     
-	function getVisittsLength() {
+	function getVisitsLength() {
 	    var getUrl = server + '/ws/rest/v1/visit';
 	    $.ajax({
 	        beforeSend: function (xhr) {
@@ -344,6 +359,7 @@
 	function getVisitsList(index) {
 	    visitsListIndex = index;
 	    var getUrl = server + "/ws/rest/v1/visit?limit=10&startIndex=" + index + '&v=default';
+	    setVisitListButtons();
 	    $.ajax({
 	        beforeSend: function (xhr) {
 	            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
