@@ -10,6 +10,9 @@
 	var username;
 	var password;
 
+	var visitsListLength;
+	var visitsListIndex;
+
 	var mySplitView = window.mySplitView = {
 	    splitView: null,
 	    homeClicked: WinJS.UI.eventHandler(function (ev) {
@@ -25,6 +28,10 @@
 	        UIController('findPatient');
 	        getPatientsList();
 	    }),
+	    visitsClicked: WinJS.UI.eventHandler(function (ev) {
+	        UIController('actVisits');
+	        getVisitsList(0)
+	    }),	    
 	};
 
 	app.onactivated = function (args) {
@@ -41,6 +48,8 @@
 			    document.getElementById('loginButton').addEventListener('click', loginClickHandler, false);
 			    document.getElementById('checkUrlButton').addEventListener('click', checkUrlClickHandler, false);
 			    document.getElementById('searchButton').addEventListener('click', searchClickHandler, false);
+			    document.getElementById('prevButton').addEventListener('click', prevClickHandler, false);
+			    document.getElementById('nextButton').addEventListener('click', nextClickHandler, false);
 			    startTime();
 			});
 		}
@@ -51,6 +60,16 @@
 		// You might use the WinJS.Application.sessionState object, which is automatically saved and restored across suspension.
 		// If you need to complete an asynchronous operation before your application is suspended, call args.setPromise().
 	};
+
+	function nextClickHandler() {
+	    if (visitsListIndex < (visitsListLength - 10))
+	        getVisitsList((visitsListIndex + 10));
+	}
+
+	function prevClickHandler() {
+	    if (visitsListIndex > 0)
+	        getVisitsList((visitsListIndex - 10));
+	}
 
 	function loginClickHandler() {
 	    document.getElementById('server').style.borderColor = 'rgba(0, 0, 0, 0.4)';
@@ -127,6 +146,7 @@
 	    switch (state) {
 
 	        case 'home':
+	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $("#findPatient").hide();
 	            $("#patientDetails").hide();
@@ -139,20 +159,22 @@
 	            break;
 
 	        case 'login':
+	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $('.win-splitview-panewrapper').hide();
 	            $('.win-splitview-paneplaceholder').hide();
 	            $('#homeContext').hide();
 	            $("#patientDetails").hide();
 	            $('#findPatient').hide();
-	            document.getElementById('username').value = '';
-	            document.getElementById('password').value = '';
+	            //document.getElementById('username').value = '';
+	            //document.getElementById('password').value = '';
 	            $('#login').show();	            
 	            WinJS.UI.XYFocus.moveFocus("right");
 	            WinJS.UI.Animation.enterPage(document.getElementById('mBody'));
 	            break;
 
 	        case 'findPatient':
+	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $('#login').hide();
 	            $("#homeContext").hide();
@@ -164,6 +186,7 @@
 	            break;
 
 	        case 'patientDetails':
+	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $('#login').hide();
 	            $("#homeContext").hide();
@@ -174,6 +197,7 @@
 	            break;
 
 	        case 'settings':
+	            $('#activeVisits').hide();
 	            $('#login').hide();
 	            $("#homeContext").hide();
 	            $("#findPatient").hide();	            
@@ -182,6 +206,17 @@
 	            $("#settings").show();
 	            WinJS.UI.Animation.slideLeftIn(document.getElementById('settings'));
 	            WinJS.UI.Animation.slideUp(document.getElementById('settingsContent'));
+	            break;
+
+	        case 'actVisits':
+	            $('#login').hide();
+	            $("#homeContext").hide();
+	            $("#findPatient").hide();
+	            $("#patientDetails").hide();
+	            $('.win-splitview-panewrapper').show();
+	            $("#settings").hide();
+	            $('#activeVisits').show();
+	            WinJS.UI.Animation.slideLeftIn(document.getElementById('activeVisits'));
 	            break;
 	    }
 	}
@@ -234,7 +269,7 @@
 	        for (var i = 0; i < data.results.length; i++) {
 	            var bdt = new Date(data.results[i].person.birthdate);
 	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
-	            var birthdate = bdt.getDay() + " " + month + " " + bdt.getFullYear();
+	            var birthdate = bdt.getUTCDate() + " " + month + " " + bdt.getFullYear();
 	            var gender = 'Male';
 	            if (data.results[i].person.gender === 'F')
 	                gender = 'Female'
@@ -265,7 +300,7 @@
 	            var patientDetails = [];
 	            var bdt = new Date(data.person.birthdate);
 	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
-	            var birthdate = bdt.getDay() + " " + month + " " + bdt.getFullYear();
+	            var birthdate = bdt.getUTCDate() + " " + month + " " + bdt.getFullYear();
 	            var gender = 'Male';
 	            if (data.person.gender === 'F')
 	                gender = 'Female'
@@ -292,13 +327,70 @@
 	    });
 	}
     
-    // Define patients set as an array of objects for list.
-	var patients = [];
-    //Convert the array into a List object.
-	var patientsList = new WinJS.Binding.List(patients);
-    //Expose the list globally in the 'Patients' namespace.
+	function getVisittsLength() {
+	    var getUrl = server + '/ws/rest/v1/visit';
+	    $.ajax({
+	        beforeSend: function (xhr) {
+	            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+	        },
+	        method: "GET",
+	        url: getUrl,
+	        success: function (data) {
+	            visitsListLength = data.results.length;
+	        }
+	    });
+	}
+
+	function getVisitsList(index) {
+	    visitsListIndex = index;
+	    var getUrl = server + "/ws/rest/v1/visit?limit=10&startIndex=" + index + '&v=default';
+	    $.ajax({
+	        beforeSend: function (xhr) {
+	            xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+	        },
+	        method: "GET",
+	        url: getUrl,
+	        success: function (data) {
+	            setVisits(data);
+	        }
+	    });
+	}
+
+	function setVisits(data) {
+	    console.log(data);
+	    var newVisits = [];
+	    if (data.results.length == 0) {
+	        newVisits.push({
+	            name: 'No Visits Found',
+	            date: '',
+	            place: ''
+	        });
+	    }
+	    else {
+	        for (var i = 0; i < data.results.length; i++) {
+	            var bdt = new Date(data.results[i].startDatetime);
+	            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][bdt.getMonth()];
+	            var date = bdt.getUTCDate() + " " + month + " " + bdt.getFullYear();
+	            newVisits.push({
+	                name: data.results[i].patient.display.split('- ')[1],
+	                date: date,
+	                type: data.results[i].visitType.display,
+	                place: '@ ' + data.results[i].location.display
+	            });
+	        }
+	    }
+	    var visitsListNew = new WinJS.Binding.List(newVisits);
+	    var visRepeater = document.querySelector("#visitsRepeater");
+	    visRepeater.winControl.data = visitsListNew;
+	    WinJS.UI.Animation.slideUp(visRepeater);
+	}
+
+    //Expose the lists globally in the 'Patients' namespace.
 	WinJS.Namespace.define("Patients",
-        { data: patientsList });
+        {
+            data: new WinJS.Binding.List([]),
+            visits: new WinJS.Binding.List([])
+        });
 
 	WinJS.Namespace.define("Navigation", {
 	    dataBinding: WinJS.Binding.as({

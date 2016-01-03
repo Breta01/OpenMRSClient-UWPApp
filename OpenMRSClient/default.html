@@ -33,7 +33,7 @@
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Home', icon: 'home', oninvoked: mySplitView.homeClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Find Patients', icon: 'zoom', oninvoked: mySplitView.patientClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Capture Vitals', icon: 'edit', oninvoked: mySplitView.xxxClicked}"></div>
-					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Active Visits', icon: 'calendar', oninvoked: mySplitView.xxxClicked}"></div>
+					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Active Visits', icon: 'calendar', oninvoked: mySplitView.visitsClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Settings', icon: 'settings', oninvoked: mySplitView.settingsClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Logout', icon: 'back', oninvoked: mySplitView.logoutClicked}"></div>
 				</div>
@@ -110,6 +110,20 @@
 							<p data-win-bind="textContent: state"></p>
 							<h4 class="win-h4"> Country </h4>
 							<p data-win-bind="textContent: country"></p>
+						</section>
+					</div>
+				</div>
+				<div class="mainContent" id="activeVisits">
+					<h2 class="win-h2"> Active Visits </h2><br />
+					<button id="prevButton" onclick="prevClickHandler" class="win-button win-button-primary"> Previous </button>
+					<button id="nextButton" onclick="nextClickHandler" class="win-button win-button-primary"> Next </button>
+					<div id="visitsRepeater" class="repeater" data-win-control="WinJS.UI.Repeater"
+						 data-win-options="{ data: Patients.visits }">
+						<section id="visitsListRepeater" data-win-control="" data-win-bind="winControl.data: this">
+							<div><h3 id="name" data-win-bind="textContent: name"></h3></div>
+							<p data-win-bind="textContent: date"></p>
+							<p class="centralList"><i data-win-bind="textContent: type"></i></p>
+							<p data-win-bind="textContent: place"></p>
 						</section>
 					</div>
 				</div>				

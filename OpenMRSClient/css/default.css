@@ -92,6 +92,8 @@ html, body {
 .mainContent {
 	display:block;
 }
+
+/* Find Patients */
 #findPatient {
 	position: absolute;
     height: 100%;
@@ -147,6 +149,7 @@ html, body {
 	display: none;
 }
 
+/* Patient Details */
 #patientDetails {
 	position: absolute;
     height: 100%;
@@ -187,6 +190,7 @@ html, body {
 	margin: 0;
 }
 
+/* Home Clock */
 .dateBox {
 	border: 1px #7f8c8d solid;
 	vertical-align: central;
@@ -199,6 +203,8 @@ html, body {
 .dateBox #date {
 	color: #45a1de;
 }
+
+/* Active Visits */
 #settings h3 {
 	padding: 15px 0 3px 0;
 	margin: 0;
@@ -211,4 +217,59 @@ html, body {
 	margin: 0;
 }
 
+/* Active Visits */
+#activeVisits {
+	position: absolute;
+    height: 100%;
+    overflow: scroll;
+}
+#visitsRepeater {
+	width: 100%;
+	position: relative;
+    z-index: 1;
+	padding-bottom: 50px;
+	padding-right: 20px;
+}
+	#visitsRepeater:after {
+	    content: '';
+        clear: both;
+        display: block;
+	}
+#visitsListRepeater h3 {
+	display: inline-block;
+	padding: 0 10px;
+	padding-bottom: 0;
+	margin-bottom: 8px;
+	padding-top: 0;
+	margin-top: 0;
+}
+#visitsListRepeater p {
+	display: inline-block;
+	padding: 0 10px;
+	margin: 0;
+}
+#visitsListRepeater .centralList {
+	border-left: 1px #3498db solid;
+	border-right: 1px #3498db solid;
+}
+#visitsListRepeater {
+	text-align: center;
+	vertical-align: central;
+	border: 2px #2c3e50 solid;
+	background-color: white;
+	width: auto;
+	display: inline-block;
+	padding: 12px 8px;
+	margin: 4px; 
+}
+	#visitsListRepeater:hover {
+		background: #2c3e50;
+		color: white;
+	}
+	#visitsListRepeater:active {
+		background: #2980b9;
+	}
+#nextButton {
+	margin-left: 50px;
+}
 
