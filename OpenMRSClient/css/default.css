@@ -40,6 +40,9 @@ html, body {
     background-color: transparent;
 	color: white !important;
 }
+#app .win-splitview-pane-hidden .win-navbarcommand-button {
+    width: 46px;
+}
 #menu {
 	background-color: #2c3e50;
 	color: white !important;
@@ -49,6 +52,23 @@ html, body {
     SplitViewCommand label receives focus while pane is closed.
     */
     visibility: hidden;
+}
+
+/*SplitView pane style for different screen sizes*/
+#app.large .splitView {
+    width: 100%;
+}
+#app.large #menuButton {
+    display: none;
+	visibility: hidden;
+}
+#app.small #menuButton {
+    color: black;
+	position: relative;
+	z-index: 10000000;
+}
+#app.small .mainContent h1 {
+	padding-left: 24px;
 }
 
 /*SplitView content style*/
@@ -61,8 +81,8 @@ html, body {
     margin-top: 6px;
 }
 
-#app .mainContent {
-	margin-top: 20px;
+#app .mainContent h1 {
+	margin-top: -10px;
 }
 
 #app .mainBoxMenu {

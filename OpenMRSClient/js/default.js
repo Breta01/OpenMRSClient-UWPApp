@@ -45,6 +45,8 @@
 			}
 			args.setPromise(WinJS.UI.processAll());
 			WinJS.UI.processAll().done(function () {
+			    loadDisplayInfo();
+			    window.onresize = loadDisplayInfo;
 			    UIController('login');
 			    document.getElementById('loginButton').addEventListener('click', loginClickHandler, false);
 			    document.getElementById('checkUrlButton').addEventListener('click', checkUrlClickHandler, false);
@@ -62,6 +64,26 @@
 		// If you need to complete an asynchronous operation before your application is suspended, call args.setPromise().
 	};
 
+	function loadDisplayInfo() {
+	    var info = Windows.Graphics.Display.DisplayInformation.getForCurrentView();
+
+	    if (info.rawDpiX > 0) {
+	        var nativePPI = info.rawDpiX;
+	        var logicalPPI = nativePPI * 100 / info.resolutionScale;
+	        var screenSizeX = WinJS.Utilities.getContentWidth(document.getElementById('app')) / nativePPI;
+	        if (screenSizeX < 5.5) {
+	            Screen.updateSplitView('small');
+	        }
+	        else {
+	            Screen.updateSplitView('large');
+	        }
+	    }
+	    else {
+	        // Simulate screen size if unavaliable 
+	        Screen.updateSplitView('small');
+	    }
+	}
+
 	function setVisitListButtons() {
 	    if (visitsListIndex === 0){
 	        document.getElementById('prevButton').style.backgroundColor = '#7f8c8d';
@@ -69,7 +91,6 @@
 	    else {
 	        document.getElementById('prevButton').style.backgroundColor = 'rgba(0, 153, 188, 1)';
 	    }
-	    console.log(visitsListIndex + ':' + visitsListLength);
 	    if (visitsListLength == null || visitsListIndex < (visitsListLength - 10)) {
 	        document.getElementById('nextButton').style.backgroundColor = 'rgba(0, 153, 188, 1)';
 	    }
@@ -161,6 +182,7 @@
 	    switch (state) {
 
 	        case 'home':
+	            $('#menuButton').show();
 	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $("#findPatient").hide();
@@ -174,6 +196,7 @@
 	            break;
 
 	        case 'login':
+                $('#menuButton').hide();
 	            $('#activeVisits').hide();
 	            $("#settings").hide();
 	            $('.win-splitview-panewrapper').hide();
@@ -373,7 +396,6 @@
 	}
 
 	function setVisits(data) {
-	    console.log(data);
 	    var newVisits = [];
 	    if (data.results.length == 0) {
 	        newVisits.push({
@@ -423,6 +445,31 @@
                     };
                 }
             ),
+	});
+
+	WinJS.Namespace.define("Screen", {
+	    mode: {
+	        small: {
+	            name: 'small',
+	            openedDisplayMode: WinJS.UI.SplitView.OpenedDisplayMode.overlay,
+	            closedDisplayMode: WinJS.UI.SplitView.ClosedDisplayMode.none,
+	        },
+	        large: {
+	            name: 'large',
+	            openedDisplayMode: WinJS.UI.SplitView.OpenedDisplayMode.overlay,
+	            closedDisplayMode: WinJS.UI.SplitView.ClosedDisplayMode.inline,
+	        }
+	    },
+	    splitView: null,
+	    updateSplitView: function (size) {
+	        Object.keys(Screen.mode).forEach(function (key) {
+	            $('#app').removeClass(Screen.mode[key].name);
+	        });
+	        var splitViewObj = document.querySelector('.splitView').winControl;
+	        splitViewObj.openedDisplayMode = Screen.mode[size].openedDisplayMode;
+	        splitViewObj.closedDisplayMode = Screen.mode[size].closedDisplayMode;
+	        $('#app').addClass(size);
+	    }
 	});
 
 	function startTime() {

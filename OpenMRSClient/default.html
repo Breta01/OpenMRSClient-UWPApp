@@ -15,7 +15,7 @@
     <script src="/js/default.js"></script>
 </head>
 <body class="win-type-body" id="mBody">
-	<div id="app">
+	<div id="app" class="large">
 		<div class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
             openedDisplayMode: 'overlay',
             closedDisplayMode: 'inline'
@@ -28,7 +28,6 @@
 							data-win-options="{ splitView: select('.splitView') }"></button>
 					<div class="title">  Menu  </div>
 				</div>
-
 				<div class="nav-commands">
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Home', icon: 'home', oninvoked: mySplitView.homeClicked}"></div>
 					<div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Find Patients', icon: 'zoom', oninvoked: mySplitView.patientClicked}"></div>
@@ -40,6 +39,9 @@
 			</div>
 
 			<!-- Content area -->
+			<button id="menuButton" class="win-splitviewpanetoggle"
+					data-win-control="WinJS.UI.SplitViewPaneToggle"
+					data-win-options="{ splitView: select('.splitView') }"></button>
 			<div class="contenttext">				
 				<div class="mainContent" id="login">
 					<h1 class="win-h1">OpenMRS</h1>
@@ -71,7 +73,7 @@
 					<!-- Add some simple settings -->
 				</div>
 				<div class="mainContent" id="findPatient">
-					<h2 class="win-h2"> Find Patients </h2><br />
+					<h1 class="win-h1"> Find Patients </h1><br />
 					<input id="searchLable" class="win-textarea" placeholder="Patient Name" type="text" value="" />
 					<button id="searchButton" onclick="searchClickHandler" class="win-button win-button-primary"> Search </button>
 					<div id="repeater" class="repeater" data-win-control="WinJS.UI.Repeater"
@@ -86,7 +88,7 @@
 					</div>
 				</div>
 				<div class="mainContent" id="patientDetails">
-					<h2 class="win-h2"> Patient Details </h2><br />
+					<h1 class="win-h1"> Patient Details </h1><br />
 					<div id="patientDetailsRepeater" class="patientDetails" data-win-control="WinJS.UI.Repeater"
 						 data-win-options="{ data: Patients.data }">
 						<section>
@@ -114,7 +116,7 @@
 					</div>
 				</div>
 				<div class="mainContent" id="activeVisits">
-					<h2 class="win-h2"> Active Visits </h2><br />
+					<h1 class="win-h1"> Active Visits </h1><br />
 					<button id="prevButton" onclick="prevClickHandler" class="win-button win-button-primary"> Previous </button>
 					<button id="nextButton" onclick="nextClickHandler" class="win-button win-button-primary"> Next </button>
 					<div id="visitsRepeater" class="repeater" data-win-control="WinJS.UI.Repeater"
