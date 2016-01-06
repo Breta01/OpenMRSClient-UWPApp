@@ -1,18 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>OpenMRS Client</title>
+	<meta charset="utf-8" />
+	<title>OpenMRS Client</title>
 
-    <!-- WinJS references -->
-    <link href="WinJS/css/ui-light.css" rel="stylesheet" />
-    <script src="WinJS/js/base.js"></script>
-    <script src="WinJS/js/ui.js"></script>
+	<!-- WinJS references -->
+	<link href="WinJS/css/ui-light.css" rel="stylesheet" />
+	<script src="WinJS/js/base.js"></script>
+	<script src="WinJS/js/ui.js"></script>
 
-    <!-- OpenMRSClient references -->
-    <link href="/css/default.css" rel="stylesheet" />
+	<!-- OpenMRSClient references -->
+	<link href="/css/default.css" rel="stylesheet" />
 	<script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/js/default.js"></script>
+	<script src="/js/default.js"></script>
 </head>
 <body class="win-type-body" id="mBody">
 	<div id="app" class="large">
@@ -42,7 +42,7 @@
 			<button id="menuButton" class="win-splitviewpanetoggle"
 					data-win-control="WinJS.UI.SplitViewPaneToggle"
 					data-win-options="{ splitView: select('.splitView') }"></button>
-			<div class="contenttext">				
+			<div class="contenttext">
 				<div class="mainContent" id="login">
 					<h1 class="win-h1">OpenMRS</h1>
 					<h4 class="win-h4">Server adress:</h4>
@@ -77,7 +77,7 @@
 					<input id="searchLable" class="win-textarea" placeholder="Patient Name" type="text" value="" />
 					<button id="searchButton" onclick="searchClickHandler" class="win-button win-button-primary"> Search </button>
 					<div id="repeater" class="repeater" data-win-control="WinJS.UI.Repeater"
-							data-win-options="{ data: Patients.data }">
+						 data-win-options="{ data: Patients.data }">
 						<section id="patientListRepeater" data-win-control="Navigation.NavigationItem" data-win-bind="winControl.data: this">
 							<div><h2 id="name" data-win-bind="textContent: name"></h2></div>
 							<p data-win-bind="textContent: age"></p>
@@ -128,7 +128,7 @@
 							<p data-win-bind="textContent: place"></p>
 						</section>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>
