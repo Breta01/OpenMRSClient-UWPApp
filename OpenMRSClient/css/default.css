@@ -117,10 +117,9 @@ html, body {
 #findPatient {
 	position: absolute;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 #repeater {
-	width: 100%;
 	position: relative;
     z-index: 1;
 	padding-bottom: 50px;
@@ -174,12 +173,9 @@ html, body {
 	position: absolute;
     height: 100%;
 	width: calc(100% - 20px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 #patientDetailsRepeater {
-	/*overflow-y: scroll;
-	height: 80%;*/
-	width: 100%;
 	position: relative;
     z-index: 1;
 	padding-bottom: 50px;
@@ -241,10 +237,9 @@ html, body {
 #activeVisits {
 	position: absolute;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 #visitsRepeater {
-	width: 100%;
 	position: relative;
     z-index: 1;
 	padding-bottom: 50px;
